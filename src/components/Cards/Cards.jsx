@@ -109,6 +109,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     // Победа - все карты на поле открыты
     if (isPlayerWon) {
       finishGame(STATUS_WON);
+      setMistakeState(0);
+      setMistakeStateDisplay(3);
       return;
     }
 
