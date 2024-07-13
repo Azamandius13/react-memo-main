@@ -161,3 +161,14 @@ text-align: center;
     text-align: center;
 
 }
+
+.LeaderBoardLink {
+  margin-top:20px;
+  color:#004980;
+  font-family: Roboto;
+font-size: 18px;
+font-weight: 400;
+line-height: 32px;
+text-align: left;
+
+}

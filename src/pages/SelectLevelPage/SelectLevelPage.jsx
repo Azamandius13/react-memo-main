@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./SelectLevelPage.module.css";
+import { Link } from "react-router-dom";
 
 export function SelectLevelPage() {
   const [level, setLevel] = useState({
@@ -27,6 +28,12 @@ export function SelectLevelPage() {
       [name]: value,
     });
     console.log(level);
+  };
+
+  const startGame = () => {
+    if (level.levelVariant === "0") {
+      alert("Выберите уровень сложности!");
+    }
   };
 
   return (
@@ -106,7 +113,14 @@ export function SelectLevelPage() {
             Легкий режим (3 жизни)
           </label>
         </div>
-        <button className={styles.game_start_btn}>Играть</button>
+
+        <button onClick={startGame} className={styles.game_start_btn}>
+          Играть
+        </button>
+        
+        <Link className={styles.LeaderBoardLink} to="/game/LeaderBoard">
+          Перейти к лидерборду
+        </Link>
       </div>
     </div>
   );
