@@ -4,6 +4,7 @@ import { SelectLevelPage } from "./pages/SelectLevelPage/SelectLevelPage";
 import { LeaderBoard } from "./pages/LeaderBoard/LeaderBoard";
 
 export const router = createBrowserRouter(
+  
   [
     {
       path: "/",

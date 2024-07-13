@@ -1,7 +1,9 @@
 // import { Link } from "react-router-dom";
-import { useState } from "react";
+import {  createContext, useState } from "react";
 import styles from "./SelectLevelPage.module.css";
 import { Link } from "react-router-dom";
+
+export const LevelContext = createContext(null)
 
 export function SelectLevelPage() {
   const [level, setLevel] = useState({
@@ -9,7 +11,9 @@ export function SelectLevelPage() {
     babyWalkers: "false",
   });
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
+
+  const [ linkRouter , setLinkRouter ] = useState(null);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -17,8 +21,22 @@ export function SelectLevelPage() {
       ...level,
       [name]: value,
     });
-    console.log(level);
+
+    if (level.levelVariant === "1") {
+      setLinkRouter("/game/3")
+      
+    } 
+    else if (level.levelVariant === "2" ){
+      setLinkRouter("/game/6")
+    }
+    else if (level.levelVariant === "3" ){
+      setLinkRouter("/game/9")
+    }
+
   };
+
+
+  console.log(level);
 
   const handleInputChangeCheckbox = e => {
     const { name, value } = e.target;
@@ -27,8 +45,10 @@ export function SelectLevelPage() {
       ...level,
       [name]: value,
     });
-    console.log(level);
+
   };
+
+  console.log(level);
 
   const startGame = () => {
     if (level.levelVariant === "0") {
@@ -36,7 +56,13 @@ export function SelectLevelPage() {
     }
   };
 
+
+
+
   return (
+  
+    <>
+  
     <div className={styles.container}>
       <div className={styles.modal}>
         <h1 className={styles.title}>Выбери сложность</h1>
@@ -115,7 +141,10 @@ export function SelectLevelPage() {
         </div>
 
         <button onClick={startGame} className={styles.game_start_btn}>
-          Играть
+        <Link className={styles.linkPlay} to={linkRouter}>
+           Играть
+        </Link>
+       
         </button>
         
         <Link className={styles.LeaderBoardLink} to="/game/LeaderBoard">
@@ -123,5 +152,7 @@ export function SelectLevelPage() {
         </Link>
       </div>
     </div>
+
+    </>
   );
 }

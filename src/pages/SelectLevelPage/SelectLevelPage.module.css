@@ -27,7 +27,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
-  margin-bottom:38px;
+  margin-bottom: 38px;
 }
 
 .levels {
@@ -67,7 +67,7 @@
 
 .form_radio_btn {
   display: inline-block;
-  margin-left:10px;
+  margin-left: 10px;
   margin-right: 10px;
 }
 
@@ -77,35 +77,35 @@
 
 .form_radio_btn_label {
   font-family: Roboto;
-font-size: 54px;
-font-weight: 400;
-line-height: 72px;
-text-align: center;
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 72px;
+  text-align: center;
   background-color: #fff;
   display: inline-block;
-	cursor: pointer;
-	padding: 0px 15px;
-	line-height: 34px;
-	border-radius: 6px;
-	user-select: none;
+  cursor: pointer;
+  padding: 0px 15px;
+  line-height: 34px;
+  border-radius: 6px;
+  user-select: none;
   width: 50px;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  color: #0080C1;
+  color: #0080c1;
 }
 
 /* Checked */
-.form_radio_btn input[type=radio]:checked + label {
-	background: #0080C1;
+.form_radio_btn input[type="radio"]:checked + label {
+  background: #0080c1;
   color: #fff;
 }
- 
+
 /* Hover */
 .form_radio_btn label:hover {
-	color: #0080C1;;
+  color: #0080c1;
 }
 
 .radio_container {
@@ -117,7 +117,7 @@ text-align: center;
 .game_start_btn {
   width: 276px;
   height: 45px;
-  background-color:#7AC100 ;
+  background-color: #7ac100;
   border-radius: 12px;
   margin-top: 20px;
   border-width: 0px;
@@ -126,12 +126,17 @@ text-align: center;
   font-weight: 400;
   line-height: 32px;
   text-align: center;
-  color:#fff
+  color: #fff;
+}
+
+.linkPlay {
+  color:#fff;
+  text-decoration: none;
 }
 
 .game_start_btn:hover {
   cursor: pointer;
-  background-color:#81c808 ;
+  background-color: #81c808;
 }
 
 .form_input_checkbox {
@@ -146,29 +151,27 @@ text-align: center;
 }
 
 .form_checkbox {
-  margin-top:20px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .form_label_checkbox {
-  margin-left:5px;
+  margin-left: 5px;
   font-family: Roboto;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 32px;
-    text-align: center;
-
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
 }
 
 .LeaderBoardLink {
-  margin-top:20px;
-  color:#004980;
+  margin-top: 20px;
+  color: #004980;
   font-family: Roboto;
-font-size: 18px;
-font-weight: 400;
-line-height: 32px;
-text-align: left;
-
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
 }
