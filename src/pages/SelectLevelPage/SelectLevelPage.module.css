@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .container {
   width: 100%;
   min-height: 100%;
@@ -26,6 +27,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
+  margin-bottom:38px;
 }
 
 .levels {
@@ -61,4 +63,101 @@
 
 .levelLink:visited {
   color: #0080c1;
+}
+
+.form_radio_btn {
+  display: inline-block;
+  margin-left:10px;
+  margin-right: 10px;
+}
+
+.form_radio_btn_input {
+  display: none;
+}
+
+.form_radio_btn_label {
+  font-family: Roboto;
+font-size: 54px;
+font-weight: 400;
+line-height: 72px;
+text-align: center;
+  background-color: #fff;
+  display: inline-block;
+	cursor: pointer;
+	padding: 0px 15px;
+	line-height: 34px;
+	border-radius: 6px;
+	user-select: none;
+  width: 50px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #0080C1;
+}
+
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+	background: #0080C1;
+  color: #fff;
+}
+ 
+/* Hover */
+.form_radio_btn label:hover {
+	color: #0080C1;;
+}
+
+.radio_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game_start_btn {
+  width: 276px;
+  height: 45px;
+  background-color:#7AC100 ;
+  border-radius: 12px;
+  margin-top: 20px;
+  border-width: 0px;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  color:#fff
+}
+
+.game_start_btn:hover {
+  cursor: pointer;
+  background-color:#81c808 ;
+}
+
+.form_input_checkbox {
+  width: 30px;
+  height: 29px;
+  top: 439px;
+  left: 353px;
+  gap: 0px;
+  border-radius: 4px 0px 0px 0px;
+  opacity: 0px;
+  border-color: #fff;
+}
+
+.form_checkbox {
+  margin-top:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_label_checkbox {
+  margin-left:5px;
+  font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: center;
+
 }

@@ -1,13 +1,12 @@
+import { useState } from "react";
 import { getPlayersList } from "../../api";
 import { LeaderBoardPlayer } from "../../components/LeaderBoardPlayer/LeaderBoardPlayer";
 import styles from "./LeaderBoard.module.css";
 
 export function LeaderBoard() {
-  let leaderArray = [
-    
-  ];
-  
-  getPlayersList().then((data) => leaderArray = data.leaders);
+  const [leaderArray, setLeaderArray] = useState([]);
+
+  getPlayersList().then(data => setLeaderArray(data.leaders));
 
   return (
     <>
@@ -22,14 +21,8 @@ export function LeaderBoard() {
           <div className={styles.leader_board_container_middle_div3}>Время</div>
         </div>
         {leaderArray.map(player => (
-          <LeaderBoardPlayer 
-            key = {player.id}
-            id = {"#" + player.id}
-            name ={player.name}
-            time = {player.time}
-          />
+          <LeaderBoardPlayer key={player.id} id={"#" + player.id} name={player.name} time={player.time} />
         ))}
-        
       </div>
     </>
   );
