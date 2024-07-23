@@ -1,61 +1,39 @@
 // import { Link } from "react-router-dom";
 import {  createContext, useState } from "react";
 import styles from "./SelectLevelPage.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEasyMode } from "../../hooks/useEasyMode";
 
 export const LevelContext = createContext(null)
 
 export function SelectLevelPage() {
-  const [level, setLevel] = useState({
-    levelVariant: "0",
-    babyWalkers: "false",
-  });
 
-  const [checked, setChecked] = useState(true);
+  const {easyMode , setEasyMode } = useEasyMode();
 
-  const [ linkRouter , setLinkRouter ] = useState(null);
+  const [level, setLevel] = useState(null);
+
 
   const handleInputChange = e => {
-    const { name, value } = e.target;
-    setLevel({
-      ...level,
-      [name]: value,
-    });
-
-    if (level.levelVariant === "1") {
-      setLinkRouter("/game/3")
-      
-    } 
-    else if (level.levelVariant === "2" ){
-      setLinkRouter("/game/6")
-    }
-    else if (level.levelVariant === "3" ){
-      setLinkRouter("/game/9")
-    }
-
+    const { value } = e.target;
+    setLevel(value);
   };
 
-
-  console.log(level);
 
   const handleInputChangeCheckbox = e => {
-    const { name, value } = e.target;
-    setChecked(!checked);
-    setLevel({
-      ...level,
-      [name]: value,
-    });
-
+    setEasyMode(!easyMode);
+    console.log(easyMode)
   };
 
-  console.log(level);
+
+  const navigate = useNavigate();
 
   const startGame = () => {
-    if (level.levelVariant === "0") {
+    if (level === null) {
       alert("Выберите уровень сложности!");
+    }else {
+      navigate(`game/${level}`);
     }
   };
-
 
 
 
@@ -91,7 +69,7 @@ export function SelectLevelPage() {
               id="radio-1"
               type="radio"
               name="levelVariant"
-              value="1"
+              value="3"
             />
             <label className={styles.form_radio_btn_label} for="radio-1">
               1
@@ -105,7 +83,7 @@ export function SelectLevelPage() {
               id="radio-2"
               type="radio"
               name="levelVariant"
-              value="2"
+              value="6"
             />
             <label className={styles.form_radio_btn_label} for="radio-2">
               2
@@ -119,7 +97,7 @@ export function SelectLevelPage() {
               id="radio-3"
               type="radio"
               name="levelVariant"
-              value="3"
+              value="9"
             />
             <label className={styles.form_radio_btn_label} for="radio-3">
               3
@@ -130,7 +108,7 @@ export function SelectLevelPage() {
           <input
             onChange={handleInputChangeCheckbox}
             className={styles.form_input_checkbox}
-            value={checked}
+            value={easyMode}
             type="checkbox"
             id="scales"
             name="babyWalkers"
@@ -141,10 +119,7 @@ export function SelectLevelPage() {
         </div>
 
         <button onClick={startGame} className={styles.game_start_btn}>
-        <Link className={styles.linkPlay} to={linkRouter}>
            Играть
-        </Link>
-       
         </button>
         
         <Link className={styles.LeaderBoardLink} to="/game/LeaderBoard">
@@ -156,3 +131,5 @@ export function SelectLevelPage() {
     </>
   );
 }
+
+
