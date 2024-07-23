@@ -5,9 +5,15 @@ import styles from "./LeaderBoard.module.css";
 
 export function LeaderBoard() {
   const [leaderArray, setLeaderArray] = useState([]);
+  let leaderBoardPosition = 1;
 
-  getPlayersList().then(data => setLeaderArray(data.leaders));
+  getPlayersList().then(data => setLeaderArray(data.leaders))
 
+  leaderArray.sort(function (a, b) {
+    return parseFloat(a.time) - parseFloat(b.time);
+  })
+
+  console.log(leaderArray);
   return (
     <>
       <div className={styles.leader_board_container}>
@@ -21,7 +27,7 @@ export function LeaderBoard() {
           <div className={styles.leader_board_container_middle_div3}>Время</div>
         </div>
         {leaderArray.map(player => (
-          <LeaderBoardPlayer key={player.id} id={"#" + player.id} name={player.name} time={player.time} />
+          <LeaderBoardPlayer key={player.id} id={leaderBoardPosition++} name={player.name} time={player.time} />
         ))}
       </div>
     </>
