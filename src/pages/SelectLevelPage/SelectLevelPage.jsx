@@ -20,8 +20,7 @@ export function SelectLevelPage() {
 
 
   const handleInputChangeCheckbox = e => {
-    setEasyMode(!easyMode);
-    console.log(easyMode)
+    setEasyMode(e.target.checked);
   };
 
 
@@ -108,7 +107,7 @@ export function SelectLevelPage() {
           <input
             onChange={handleInputChangeCheckbox}
             className={styles.form_input_checkbox}
-            value={easyMode}
+            checked={easyMode}
             type="checkbox"
             id="scales"
             name="babyWalkers"

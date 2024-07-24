@@ -4,7 +4,7 @@ export const EasyModeContext = createContext(null);
 
 export const EasyModeProvider = ({children}) => {
 
-    const [ easyMode , setEasyMode ] = useState(true);
+    const [ easyMode , setEasyMode ] = useState(false);
 
     return (
         <EasyModeContext.Provider value={{easyMode , setEasyMode}}>
