@@ -220,7 +220,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
             </>
           )}
         </div>
-        <img src="./img/Group 1077240079.png"/>
+        <img src="./img/Group1077240079.png"/>
         {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
       </div>
 
