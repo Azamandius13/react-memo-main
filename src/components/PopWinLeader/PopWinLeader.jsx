@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./PopWinLeader.module.css";
+import { addPlayerToLeaderboard } from "../../api";
 
-export function PopWinLeader() {
+export function PopWinLeader({gameDurationSeconds , gameDurationMinutes}) {
 
   const navigate = useNavigate();
 
@@ -10,8 +11,10 @@ export function PopWinLeader() {
     }
 
     const handleInputEnter = () => {
-        navigate("/game/leaderboard")
+        addPlayerToLeaderboard({ name : "timmy" , time : "545"}).then(() => navigate("/game/leaderboard"))
     }
+
+
 
     return (
         <>
@@ -27,7 +30,7 @@ export function PopWinLeader() {
                             }} 
                         className={styles.input_win} placeholder="Пользователь" />
                         <h2 className={styles.h2_win} >Затраченное время:</h2>
-                        <h1 className={styles.win_time}>01.30</h1>
+                        <h1 className={styles.win_time}>{gameDurationMinutes.toString().padStart("2", "0")}.{gameDurationSeconds.toString().padStart("2", "0")}`</h1>
                         <button onClick={playAgain} className={styles.win_button}>Играть снова</button>
                         <Link to="/game/leaderboard">
                             <h1 className={styles.leaderboard_win_link}>Перейти к лидерборду</h1>
