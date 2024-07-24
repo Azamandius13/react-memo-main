@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPlayersList } from "../../api";
 import { LeaderBoardPlayer } from "../../components/LeaderBoardPlayer/LeaderBoardPlayer";
 import styles from "./LeaderBoard.module.css";
+import { useNavigate } from "react-router-dom";
 
 export function LeaderBoard() {
   const [leaderArray, setLeaderArray] = useState([]);
   let leaderBoardPosition = 1;
 
-  getPlayersList().then(data => setLeaderArray(data.leaders))
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getPlayersList().then(data => setLeaderArray(data.leaders))
+  }, []);
+
 
   leaderArray.sort(function (a, b) {
     return parseFloat(a.time) - parseFloat(b.time);
   })
+  
+
+  const playAgain = () => {
+    navigate("/")
+}
 
   console.log(leaderArray);
   return (
@@ -19,7 +30,7 @@ export function LeaderBoard() {
       <div className={styles.leader_board_container}>
         <div className={styles.leader_board_container_top}>
           <h1 className={styles.leader_board_container_h1}>Лидерборд</h1>
-          <button className={styles.leader_board_container_button}>Начать игру</button>
+          <button onClick={playAgain} className={styles.leader_board_container_button}>Начать игру</button>
         </div>
         <div className={styles.leader_board_container_middle}>
           <div className={styles.leader_board_container_middle_div1}>Позиция</div>
