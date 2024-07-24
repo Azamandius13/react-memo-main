@@ -6,6 +6,7 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { useEasyMode } from "../../hooks/useEasyMode";
+import { PopWinLeader } from "../PopWinLeader/PopWinLeader";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -246,6 +247,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       ) : null}
 
       {easyMode ?  ( <h1 className={styles.h1class}>Попыток: {mistakeStateDisplay}</h1> ) : (<></>) }
+      <PopWinLeader/>
     </div>
   );
 }
