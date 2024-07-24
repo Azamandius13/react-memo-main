@@ -6,7 +6,6 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { useEasyMode } from "../../hooks/useEasyMode";
-import { PopWinLeader } from "../PopWinLeader/PopWinLeader";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -45,6 +44,7 @@ function getTimerValue(startDate, endDate) {
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   // Контекст легкого режима и функция стейт для изменения
   const { easyMode } = useEasyMode();
+
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
@@ -235,9 +235,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         ))}
       </div>
 
-      {isGameEnded ? (
+      {isGameEnded ? ( 
         <div className={styles.modalContainer}>
           <EndGameModal
+            pairsCount={pairsCount}
             isWon={status === STATUS_WON}
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
@@ -247,7 +248,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       ) : null}
 
       {easyMode ?  ( <h1 className={styles.h1class}>Попыток: {mistakeStateDisplay}</h1> ) : (<></>) }
-      <PopWinLeader/>
     </div>
   );
 }
