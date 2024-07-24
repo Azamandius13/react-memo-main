@@ -16,13 +16,11 @@ export async function getPlayersList() {
 
 export async function addPlayerToLeaderboard({ name, time }) {
   const response = await fetch(API_URL, {
-      headers: {
         method: "POST",
         body: JSON.stringify({
           name,
           time,
         }),
-      },
     });
 
     if (!response.ok) {

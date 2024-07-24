@@ -35,10 +35,6 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
         />
       ) : (
         <>
-          <PopWinLeader
-            gameDurationSeconds={gameDurationSeconds}
-            gameDurationMinutes={gameDurationMinutes}
-          />
           <div className={styles.modal}>
             <img className={styles.image} src={imgSrc} alt={imgAlt} />
             <h2 className={styles.title}>{title}</h2>
