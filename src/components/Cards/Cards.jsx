@@ -6,6 +6,10 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { useEasyMode } from "../../hooks/useEasyMode";
+import visionActiveURL from "./images/vision_active.png";
+import pairsActiveURL from "./images/pairs_active.png";
+import visionUnActiveURL from "./images/vision_unactive.png";
+import pairsUnActiveURL from "./images/pairs_unactive.png";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -59,6 +63,19 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   const [mistakeState, setMistakeState] = useState(0);
   const [mistakeStateDisplay, setMistakeStateDisplay] = useState(3);
 
+  const [visionActive, setVisionActive] = useState(true);
+  const [pairsActive, setPairsActive] = useState(true);
+
+  // const [ mistakeCardClose , setMistakeCardClose ] = useState();
+
+  const visionActivation = () => {
+    setVisionActive(!visionActive);
+  }
+
+  const pairsAcrtivation = () => {
+    setPairsActive(!pairsActive)
+  }
+
   // Стейт для таймера, высчитывается в setInteval на основе gameStartDate и gameEndDate
   const [timer, setTimer] = useState({
     seconds: 0,
@@ -82,6 +99,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
+    setPairsActive(true);
+    setVisionActive(true);
   }
 
   /**
@@ -101,12 +120,18 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       if (card.id !== clickedCard.id) {
         return card;
       }
+      
 
       return {
         ...card,
         open: true,
       };
+
+      
+     
+
     });
+
 
     setCards(nextCards);
 
@@ -115,10 +140,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     // Победа - все карты на поле открыты
     if (isPlayerWon) {
       if (easyMode) {
-      finishGame(STATUS_WON);
-      setMistakeState(0);
-      setMistakeStateDisplay(3);
-      return;
+        finishGame(STATUS_WON);
+        setMistakeState(0);
+        setMistakeStateDisplay(3);
+        return;
       } else {
         finishGame(STATUS_WON);
       }
@@ -131,12 +156,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
     const openCardsWithoutPair = openCards.filter(card => {
       const sameCards = openCards.filter(openCard => card.suit === openCard.suit && card.rank === openCard.rank);
-
       if (sameCards.length < 2) {
         return true;
       }
       return false;
     });
+
+
+    
+
 
     const playerLost = openCardsWithoutPair.length >= 2;
     // "Игрок проиграл", т.к на поле есть две открытые карты без пары
@@ -160,6 +188,17 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   };
 
   const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
+
+  useEffect(() => { 
+    const openCards = cards.filter(card => card.open);
+    setTimeout(()=>{
+      if(openCards.length > 0){
+        openCards[1].open = false;
+      }
+     }, 2000)
+    return console.log(openCards)
+  } , [mistakeStateDisplay])
+
 
   // Игровой цикл
   useEffect(() => {
@@ -197,6 +236,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     };
   }, [gameStartDate, gameEndDate]);
 
+  // const mistakeCardCloser = () => {
+  //   setTimeout(
+  // }
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -220,8 +263,18 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
             </>
           )}
         </div>
-        <img src="./img/Group1077240079.png"/>
-        {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
+
+
+        {status === STATUS_IN_PROGRESS ?
+          <>
+            {visionActive ? (<img src={visionActiveURL} onClick={visionActivation} className={styles.visionActive} />) : (<img src={visionUnActiveURL} />)}
+            {pairsActive ? (<img src={pairsActiveURL} onClick={pairsAcrtivation} className={styles.pairsActive} />) : (<img src={pairsUnActiveURL} />)}
+
+
+            <Button onClick={resetGame}>Начать заново</Button>
+          </>
+          : null}
+
       </div>
 
       <div className={styles.cards}>
@@ -236,7 +289,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         ))}
       </div>
 
-      {isGameEnded ? ( 
+      {isGameEnded ? (
         <div className={styles.modalContainer}>
           <EndGameModal
             pairsCount={pairsCount}
@@ -248,7 +301,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         </div>
       ) : null}
 
-      {easyMode ?  ( <h1 className={styles.h1class}>Попыток: {mistakeStateDisplay}</h1> ) : (<></>) }
+      {easyMode ? (<h1 className={styles.h1class}>Попыток: {mistakeStateDisplay}</h1>) : (<></>)}
     </div>
   );
 }

@@ -82,4 +82,10 @@
   line-height: 32px;
 }
 
+.visionActive:hover {
+  cursor: pointer;
+}
 
+.pairsActive:hover {
+  cursor: pointer;
+}
