@@ -66,11 +66,32 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   const [visionActive, setVisionActive] = useState(true);
   const [pairsActive, setPairsActive] = useState(true);
 
+  const [ cardsOpened , setCardsOpened] = useState([]);
+
   // const [ mistakeCardClose , setMistakeCardClose ] = useState();
+
+
+
 
   const visionActivation = () => {
     setVisionActive(!visionActive);
   }
+
+  useEffect(()=> {
+      if(!visionActive){
+        setCardsOpened(cards);
+        cards.map(card => card.open = true); 
+        setTimeout(()=> {
+          console.log(cardsOpened);
+          setCards(cardsOpened);
+          console.log(cards);
+        }, 5000)
+      }
+  } , [visionActive])
+
+
+
+
 
   const pairsAcrtivation = () => {
     setPairsActive(!pairsActive)
@@ -213,6 +234,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
 
   const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
+
+
 
   // Игровой цикл
   useEffect(() => {
