@@ -163,6 +163,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     });
 
 
+
     
 
 
@@ -187,18 +188,31 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     // ... игра продолжается
   };
 
-  const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
-
   useEffect(() => { 
-    const openCards = cards.filter(card => card.open);
-    setTimeout(()=>{
-      if(openCards.length > 0){
-        openCards[1].open = false;
+    setTimeout(()=> {
+      const openCards = cards.filter(card => card.open);
+      // Ищем открытые карты, у которых нет пары среди других открытых
+      const openCardsWithoutPair = openCards.filter(card => {
+        const sameCards = openCards.filter(openCard => card.suit === openCard.suit && card.rank === openCard.rank);
+        if (sameCards.length < 2) {
+          return true;
+        }
+        return false;
+      });
+      let switcher = true;
+      if(openCardsWithoutPair.length > 0 && switcher === true) {
+        switcher = false;
+        openCardsWithoutPair[1].open = false
+      }else if (openCardsWithoutPair.length > 0 && switcher === false) {
+        switcher = true;
+        openCardsWithoutPair[0].open = false
       }
-     }, 2000)
-    return console.log(openCards)
+    } , 2000)
   } , [mistakeStateDisplay])
 
+
+
+  const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
 
   // Игровой цикл
   useEffect(() => {
