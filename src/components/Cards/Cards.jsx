@@ -77,14 +77,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setVisionActive(!visionActive);
   }
 
+
+
+
   useEffect(()=> {
+     setCardsOpened(cards);
       if(!visionActive){
-        setCardsOpened(cards);
         cards.map(card => card.open = true); 
         setTimeout(()=> {
-          console.log(cardsOpened);
           setCards(cardsOpened);
-          console.log(cards);
         }, 5000)
       }
   } , [visionActive])
@@ -224,9 +225,11 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       if(openCardsWithoutPair.length > 0 && switcher === true) {
         switcher = false;
         openCardsWithoutPair[1].open = false
+        openCardsWithoutPair[0].open = false
       }else if (openCardsWithoutPair.length > 0 && switcher === false) {
         switcher = true;
         openCardsWithoutPair[0].open = false
+        openCardsWithoutPair[1].open = false
       }
     } , 2000)
   } , [mistakeStateDisplay])
